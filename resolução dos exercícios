@@ -1,0 +1,289 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	texto := "Olá, olá mundo! Olá, mundo feliz!"
+	contagem := contarPalavras(texto)
+	fmt.Println("Contagem de palavras:", contagem)
+}
+
+func contarPalavras(texto string) map[string]int {
+	palavras := strings.Fields(texto)
+	contagem := make(map[string]int)
+
+	for _, palavra := range palavras {
+		contagem[palavra]++
+	}
+
+	return contagem
+}
+
+package main
+
+import "fmt"
+
+func main() {
+	mapa1 := map[string]int{
+		"chave1": 1,
+		"chave2": 2,
+	}
+	mapa2 := map[string]int{
+		"chave2": 3,
+		"chave3": 4,
+	}
+	mapaCombinado := combinarMapas(mapa1, mapa2)
+	fmt.Println("Mapa combinado:", mapaCombinado)
+}
+
+func combinarMapas(m1, m2 map[string]int) map[string]int {
+	resultado := make(map[string]int)
+
+	for chave, valor := range m1 {
+		resultado[chave] = valor
+	}
+	for chave, valor := range m2 {
+		resultado[chave] = valor
+	}
+
+	return resultado
+}
+
+package main
+
+import "fmt"
+
+func main() {
+	mapa := map[string]int{
+		"chave1": 10,
+		"chave2": 20,
+		"chave3": 30,
+	}
+	soma := somarValores(mapa)
+	fmt.Println("Soma dos valores:", soma)
+}
+
+func somarValores(m map[string]int) int {
+	soma := 0
+
+	for _, valor := range m {
+		soma += valor
+	}
+
+	return soma
+}
+
+package main
+
+import (
+	"fmt"
+	"sort"
+	"strings"
+)
+
+func main() {
+	palavras := []string{"amor", "roma", "casa", "saca", "vida", "diva", "arroz", "zorra"}
+	anagramas := encontrarAnagramas(palavras)
+	fmt.Println("Anagramas encontrados:", anagramas)
+}
+
+func encontrarAnagramas(palavras []string) map[string][]string {
+	anagramas := make(map[string][]string)
+
+	for _, palavra := range palavras {
+		chave := sortString(palavra)
+		anagramas[chave] = append(anagramas[chave], palavra)
+	}
+
+	return anagramas
+}
+
+func sortString(s string) string {
+	runes := []rune(s)
+	sort.Slice(runes, func(i, j int) bool {
+		return runes[i] < runes[j]
+	})
+	return strings.ToLower(string(runes))
+}
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	texto := "abracadabra"
+	frequencia := contarCaracteres(texto)
+	fmt.Println("Frequência de caracteres:", frequencia)
+}
+
+func contarCaracteres(texto string) map[string]int {
+	frequencia := make(map[string]int)
+
+	for _, char := range texto {
+		letra := strings.ToLower(string(char))
+		frequencia[letra]++
+	}
+
+	return frequencia
+}
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	texto1 := map[string]int{
+		"ola":   2,
+		"mundo": 3,
+	}
+	texto2 := map[string]int{
+		"ola":    1,
+		"gopher": 2,
+	}
+	texto3 := map[string]int{
+		"gopher": 4,
+		"hello":  1,
+	}
+	textos := []map[string]int{texto1, texto2, texto3}
+	soma := somarContagens(textos)
+	fmt.Println("Soma das contagens:", soma)
+}
+
+func somarContagens(textos []map[string]int) map[string]int {
+	soma := make(map[string]int)
+
+	for _, texto := range textos {
+		for palavra, contagem := range texto {
+			soma[palavra] += contagem
+		}
+	}
+
+	return soma
+}
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	frase := "hello world gopher"
+	contagem := contagemLetrasPorPalavra(frase)
+	fmt.Println("Contagem de letras por palavra:", contagem)
+}
+
+func contagemLetrasPorPalavra(frase string) map[string]map[string]int {
+	contagem := make(map[string]map[string]int)
+
+	palavras := strings.Fields(frase)
+	for _, palavra := range palavras {
+		contagem[palavra] = contarLetras(palavra)
+	}
+
+	return contagem
+}
+
+func contarLetras(palavra string) map[string]int {
+	letras := make(map[string]int)
+
+	for _, char := range palavra {
+		letra := strings.ToLower(string(char))
+		letras[letra]++
+	}
+
+	return letras
+}
+
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	despesas := map[string]float64{
+		"João":   100.0,
+		"Maria":  50.0,
+		"Pedro":  20.0,
+		"Carlos": 30.0,
+	}
+	ajustes := calcularAjustes(despesas)
+	fmt.Println("Ajustes:", ajustes)
+}
+
+func calcularAjustes(despesas map[string]float64) map[string]float64 {
+	total := 0.0
+
+	for _, valor := range despesas {
+		total += valor
+	}
+
+	media := total / float64(len(despesas))
+	ajustes := make(map[string]float64)
+
+	for nome, valor := range despesas {
+		ajustes[nome] = valor - media
+	}
+
+	return ajustes
+}
+
+package main
+
+import "fmt"
+
+func main() {
+	sequencia := gerarSequenciaFibonacci(10)
+	fmt.Println("Sequência de Fibonacci:", sequencia)
+}
+
+func gerarSequenciaFibonacci(n int) map[int]int {
+	sequencia := make(map[int]int)
+
+	for i := 0; i <= n; i++ {
+		if i <= 1 {
+			sequencia[i] = i
+		} else {
+			sequencia[i] = sequencia[i-1] + sequencia[i-2]
+		}
+	}
+
+	return sequencia
+}
+
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	numeros := []int{1, 2, 2, 3, 3, 3, 4, 4, 4, 4}
+	paresFrequencia := contarParesFrequencia(numeros)
+	fmt.Println("Frequência de pares:", paresFrequencia)
+}
+
+func contarParesFrequencia(numeros []int) map[[2]int]int {
+	paresFrequencia := make(map[[2]int]int)
+	sort.Ints(numeros)
+
+	for i := 0; i < len(numeros); i++ {
+		for j := i + 1; j < len(numeros); j++ {
+			paresFrequencia[[2]int{numeros[i], numeros[j]}]++
+		}
+	}
+
+	return paresFrequencia
+}
+
